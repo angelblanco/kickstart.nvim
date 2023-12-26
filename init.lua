@@ -340,12 +340,13 @@ vim.keymap.set('n', '<leader>xc', '<cmd>NvimTreeClose<CR>')
 
 -- Yank to windows keymaps
 -- Yank current selection
-vim.keymap.set({'n', 'v' }, '<leader>yc', '<cmd>\'<,\'> !clip.exe<CR>', { desc = '[Y]ank [C]urrent Selection to Windows' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ys', '<cmd>\'<,\'> !clip.exe<CR>', { desc = '[Y]ank [S]election to Windows' })
 -- Yan current buffer
 vim.keymap.set({ 'n', 'v' }, '<leader>yb', '<cmd>:w !clip.exe<CR>', { desc = '[Y]ank [B]uffer to Windows' })
 
--- Format file
+-- Format files
 vim.keymap.set({ 'n', 'v' }, '<leader>ff', '<cmd>Format<CR>', { desc = '[F]ormat [F]ile' })
+vim.keymap.set('n', '<leader>te', '<cmd>%s/\\s\\+$//e<CR>', { desc = 'Trim white spaces end of line' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -450,7 +451,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'html', 'php', 'templ' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'html', 'php', 'templ', 'markdown' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -595,12 +596,14 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   gopls = {},
+  templ = {},
   -- pyright = {},
   rust_analyzer = {},
   tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
   volar = {}, -- vue-language-server
   phpactor = {},
+  bashls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -687,13 +690,6 @@ cmp.setup {
     { name = 'path' },
   },
 }
-
--- additional filetypes
-vim.filetype.add({
-  extension = {
-    templ = "templ",
-  },
-})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
