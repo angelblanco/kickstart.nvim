@@ -335,14 +335,11 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Nvim Tree keymaps
-vim.keymap.set('n', '<leader>xo', '<cmd>NvimTreeOpen<CR>')
-vim.keymap.set('n', '<leader>xc', '<cmd>NvimTreeClose<CR>')
-
--- Yank to windows keymaps
--- Yank current selection
-vim.keymap.set({ 'n', 'v' }, '<leader>ys', '<cmd>\'<,\'> !clip.exe<CR>', { desc = '[Y]ank [S]election to Windows' })
--- Yan current buffer
-vim.keymap.set({ 'n', 'v' }, '<leader>yb', '<cmd>:w !clip.exe<CR>', { desc = '[Y]ank [B]uffer to Windows' })
+vim.keymap.set('n', '<leader>xo', '<cmd>NvimTreeOpen<CR>', { desc = 'E[X]plorer [O]pen' })
+vim.keymap.set('n', '<leader>xt', '<cmd>NvimTreeToggle<CR>', { desc = 'E[X]plorer [T]oggle' })
+vim.keymap.set('n', '<leader>xc', '<cmd>NvimTreeClose<CR>', { desc = 'E[X]plorer [C]lose' })
+vim.keymap.set('n', '<leader>xl', '<cmd>NvimTreeCollapse<CR>', { desc = 'E[X]plorer Co[L]lapse' })
+vim.keymap.set('n', '<leader>xf', '<cmd>NvimTreeFindFile<CR>', { desc = 'E[X]plorer [F]ind File (current)'})
 
 -- Format files
 vim.keymap.set({ 'n', 'v' }, '<leader>ff', '<cmd>Format<CR>', { desc = '[F]ormat [F]ile' })
@@ -570,7 +567,6 @@ require('which-key').register {
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
   ['<leader>x'] = { name = 'E[X]plore Nvim Tree', _ = 'which_key_ignore' },
-  ['<leader>y'] = { name = '[Y]ank Windows', _ = 'which_key_ignore' },
   ['<leader>f'] = { name = '[F]ormat', _ = 'which_key_ignore' },
 }
 -- register which-key VISUAL mode
