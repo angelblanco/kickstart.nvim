@@ -62,3 +62,10 @@ sudo apt install libfuse2
 echo "Installing neovim in latest neovim stable with appimage"
 echo "TODO: "
 
+
+echo ""
+echo "---"
+echo "WARN: If you are using WSL you probably need to install win32yank."
+echo "If so open a PowerShell and run"
+echo "> winget install win32yank"
+echo ""
