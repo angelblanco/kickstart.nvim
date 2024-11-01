@@ -4,12 +4,13 @@
 #
 # PLEASE Insepect the file before actually running it:
 #
-# bash ./ubuntu.sh
+# bash ./install-nvim.sh
 #
 # Elevated permissions with sudo are mandatory.
 #
 #
 
+set -e
 
 # Basic confirmation module before executing the script.
 confirm_action() {
@@ -72,34 +73,3 @@ echo "WARN: If you are using WSL you probably need to install win32yank."
 echo "If so open a PowerShell and run"
 echo "> winget install win32yank"
 echo ""
-
-
-echo "Now we are going to install php, composer, golang and rust on your machine to the latest version"
-echo ""
-
-sudo apt install ca-certificates apt-transport-https software-properties-common
-sudo add-apt-repository ppa:ondrej/php
-sudo apt install php8.3
-
-# Composer installation
-echo "Instaling composer"
-EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
-
-if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
-then
-    >&2 echo 'ERROR: Invalid installer checksum'
-    rm composer-setup.php
-    exit 1
-fi
-
-php composer-setup.php --quiet
-rm composer-setup.php
-sudo mv composer.phar /usr/local/bin/composer
-
-echo "Installing go through snap"
-sudo snap install go --classic
-
-echo "Installing rust"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
