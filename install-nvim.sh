@@ -34,6 +34,7 @@ NVIM_PATH=/usr/local/bin/nvim
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 DEPS="build-essential ripgrep"
 TMP_DIR="$SCRIPT_DIR/tmp"
+NVIM_ARCH=$(uname -m)
 
 echo "This script will install several utilities in your computer."
 echo "Is recommended that you inspect this script before continuing"
@@ -47,6 +48,7 @@ echo " - Install neovim as app-image in $NVIM_PATH"
 echo "SCRIPT_DIR: $SCRIPT_DIR"
 echo "TMP_DIR: $TMP_DIR"
 echo "NVIM_PATH: $NVIM_PATH"
+echo "NVIM_ARCH: $NVIM_ARCH"
 
 confirm_action
 
@@ -62,7 +64,7 @@ sudo apt install libfuse2
 
 echo "Installing neovim in latest neovim stable with appimage"
 mkdir -p $TMP_DIR
-wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage -O $TMP_DIR/nvim
+wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-$NVIM_ARCH.appimage" -O $TMP_DIR/nvim
 sudo chmod +x $TMP_DIR/nvim
 sudo mv $TMP_DIR/nvim $NVIM_PATH
 echo "Neovim installed under $TMP_DIR/nvim"

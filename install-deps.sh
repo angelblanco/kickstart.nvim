@@ -34,7 +34,7 @@ CUR_USER=$USER
 ZSHRC_FILE="$HOME/.zshrc"
 TMP_DIR=$SCRIPT_DIR/tmp
 NODE_VERSION=22
-PHP_VERSION=8.3
+PHP_VERSION=8.4
 
 echo "Install Node $NODE_VERSION, php $PHP_VERSION, composer, golang (latest) and rust (latest) on your machine to the given versions"
 echo ""
