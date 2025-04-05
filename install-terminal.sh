@@ -89,8 +89,8 @@ NEW_CONTENT=$(cat << 'EOF'
 ## [[ DO NOT REMOVE THE LINE ABOVE OR THIS CONTENT ]]
 eval "$(starship init zsh)"
 
-export EDITOR=neovim
-export VISUAL=neovim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
