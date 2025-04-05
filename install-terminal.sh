@@ -125,6 +125,10 @@ fi
 # Alias
 alias v=nvim
 alias n=nvim
+alias p=pnpm
+alias t=trae
+alias c=code
+alias y=yarn
 alias psg="ps aux | grep -v 'grep' | grep"
 alias ralias="source ~/.zshrc"
 ## [[ DO NOT REMOVE THE LINE BELOW OR THIS CONTENT ]]
