@@ -126,6 +126,7 @@ fi
 alias v=nvim
 alias n=nvim
 alias p=pnpm
+alias pr="pnpm run"
 alias t=trae
 alias c=code
 alias y=yarn
