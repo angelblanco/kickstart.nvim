@@ -27,15 +27,13 @@ confirm_action() {
     esac
 }
 
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
-echo "Install all dependencies? You will be prompted for sudo password and indiviudally for each lang"
+DEPS="curl git build-essential ripgrep ca-certificates apt-transport-https software-properties-common unzip p7zip-full p7zip-rar jq"
+
+echo "Install $DEPS ?"
 echo ""
 
 confirm_action
 
-bash $SCRIPT_DIR/install-basics.sh
-bash $SCRIPT_DIR/install-node.sh
-bash $SCRIPT_DIR/install-php.sh
-bash $SCRIPT_DIR/install-golang.sh
-bash $SCRIPT_DIR/install-rust.sh
+sudo apt update
+sudo apt install $DEPS

@@ -1,10 +1,8 @@
 #!/bin/bash
 #
-# This file set up installations of the languages I use for coding.
+# bash ./install-rust.sh
 #
-# bash ./install-deps.sh
-#
-# Elevated permissions with sudo are mandatory.
+# Install rust on Ubuntu. Elevated permissions with sudo are mandatory.
 #
 
 set -e
@@ -27,15 +25,14 @@ confirm_action() {
     esac
 }
 
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-
-echo "Install all dependencies? You will be prompted for sudo password and indiviudally for each lang"
+echo "Install rust (latest)?"
 echo ""
 
-confirm_action
+echo "Installing rust"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-bash $SCRIPT_DIR/install-basics.sh
-bash $SCRIPT_DIR/install-node.sh
-bash $SCRIPT_DIR/install-php.sh
-bash $SCRIPT_DIR/install-golang.sh
-bash $SCRIPT_DIR/install-rust.sh
+echo ""
+echo "Installation completed, printing version"
+
+echo "Rustc Version"
+rustc --version

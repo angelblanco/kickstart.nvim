@@ -2,7 +2,7 @@
 #
 # This file set up installations of the languages I use for coding.
 #
-# bash ./install-deps.sh
+# bash ./install-node.sh
 #
 # Elevated permissions with sudo are mandatory.
 #
@@ -27,15 +27,30 @@ confirm_action() {
     esac
 }
 
+NODE_VERSION=22
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+TMP_DIR=$SCRIPT_DIR/tmp
 
-echo "Install all dependencies? You will be prompted for sudo password and indiviudally for each lang"
+echo "Install Node $NODE_VERSION and bun on your machine?"
 echo ""
 
 confirm_action
 
-bash $SCRIPT_DIR/install-basics.sh
-bash $SCRIPT_DIR/install-node.sh
-bash $SCRIPT_DIR/install-php.sh
-bash $SCRIPT_DIR/install-golang.sh
-bash $SCRIPT_DIR/install-rust.sh
+sudo apt update
+sudo apt install $DEPS
+
+curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION.x -o $TMP_DIR/nodesource_setup.sh
+sudo -E bash $TMP_DIR/nodesource_setup.sh
+sudo apt-get install -y nodejs
+sudo corepack enable
+curl -fsSL https://bun.sh/install | bash
+
+echo ""
+echo "Installation completed, printing versions"
+
+node --version
+yarn --version
+pnpm --version
+bun --version
+
+

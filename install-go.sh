@@ -27,15 +27,16 @@ confirm_action() {
     esac
 }
 
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
-echo "Install all dependencies? You will be prompted for sudo password and indiviudally for each lang"
+
+echo "Install golang (latest)"
 echo ""
 
 confirm_action
 
-bash $SCRIPT_DIR/install-basics.sh
-bash $SCRIPT_DIR/install-node.sh
-bash $SCRIPT_DIR/install-php.sh
-bash $SCRIPT_DIR/install-golang.sh
-bash $SCRIPT_DIR/install-rust.sh
+echo "Installing go through snap"
+sudo snap install go --classic
+
+echo ""
+echo "Installation completed, printing version"
+go version
