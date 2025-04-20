@@ -668,7 +668,19 @@ require('lazy').setup({
         templ = {},
         -- pyright = {},
         rust_analyzer = {},
-        ts_ls = {},
+        -- Taken from: https://dev.to/danwalsh/solved-vue-3-typescript-inlay-hint-support-in-neovim-53ej
+        ts_ls = {
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+          init_options = {
+            plugins = {
+              {
+                name = '@vue/typescript-plugin',
+                location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+                languages = { 'vue' },
+              },
+            },
+          },
+        },
         html = { filetypes = { 'html', 'twig', 'hbs' } },
         volar = {}, -- vue-language-server
         phpactor = {},
