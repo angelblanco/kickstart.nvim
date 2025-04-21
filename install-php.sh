@@ -35,7 +35,7 @@ confirm_action
 
 sudo apt update
 sudo add-apt-repository ppa:ondrej/php
-sudo apt install php$PHP_VERSION
+sudo apt install php$PHP_VERSION php$PHP_VERSION-mbstring php$PHP_VERSION-curl php$PHP_VERSION-mbstring php$PHP_VERSION-zip
 
 # Composer installation
 echo "Instaling composer"
