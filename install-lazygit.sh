@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# bash ./install-yazi.sh
+# bash ./install-lazygit.sh
 #
 # Install rust on Ubuntu. Elevated permissions with sudo are mandatory.
 #
@@ -27,31 +27,24 @@ confirm_action() {
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 TMP_DIR=$SCRIPT_DIR/tmp
-YAZI_REPO_DIR=$TMP_DIR/yazi
+LAZY_GIT_DIR=$TMP_DIR/lazygit
 
-echo "Install yazi (latest) from source?"
+echo "Install lazygit (latest) from source?"
 echo ""
 
 confirm_action
 
-echo "Checking cargo and git versions"
-cargo --version
-git --version
+rm -rf $LAZY_GIT_DIR 
+mkdir -p $LAZY_GIT_DIR
+cd $LAZY_GIT_DIR
 
-echo "Installing DEPS"
-sudo apt install ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
 
-rm -rf $YAZI_REPO_DIR
-echo "Cloning yazi repo"
-git clone https://github.com/sxyazi/yazi.git $YAZI_REPO_DIR
-cd $YAZI_REPO_DIR
-cargo build --release --locked
-sudo mv target/release/yazi target/release/ya /usr/local/bin/
+rm -rf $LAZY_GIT_DIR
 
-echo "Printing yazi version"
-echo "yazi and ya installed on /usr/local/bin remove them for uninstall"
+echo "Lazy git installed. Version: "
+lazygit --version
 
-yazi --version
-ya --version
-
-rm -rf $YAZI_REPO_DIR
