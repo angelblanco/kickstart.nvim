@@ -131,7 +131,7 @@ alias t=trae
 alias c=code
 alias y=yarn
 alias psg="ps aux | grep -v 'grep' | grep"
-alias ralias="source ~/.zshrc"
+alias lg=lazygit
 ## [[ DO NOT REMOVE THE LINE BELOW OR THIS CONTENT ]]
 # ****
 EOF

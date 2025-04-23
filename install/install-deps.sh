@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# This file set up installations of the languages I use for coding.
+# This file set up installations of the languages I use for coding with no 
+# external tools.
 #
 # bash ./install-deps.sh
 #
