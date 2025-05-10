@@ -10,9 +10,9 @@ return {
     -- bigfile = { enabled = true },
     -- dashboard = { enabled = true },
     -- explorer = { enabled = true },
+    -- picker = { enabled = true, replace_netrw = false },
     -- indent = { enabled = true },
     -- input = { enabled = true },
-    -- picker = { enabled = true },
     -- notifier = { enabled = true },
     -- quickfile = { enabled = true },
     -- scope = { enabled = true },
@@ -29,5 +29,12 @@ return {
       end,
       desc = 'Lazy[GG]it',
     },
+    -- {
+    --   '<leader>te',
+    --   function()
+    --     Snacks.explorer()
+    --   end,
+    --   desc = '[T]oggle File [E]xplorer',
+    -- },
   },
 }
