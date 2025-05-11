@@ -475,8 +475,8 @@ require('lazy').setup({
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'mason-org/mason.nvim', opts = {} },
-      'mason-org/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', version = '^1.0.0', opts = {} },
+      { 'mason-org/mason-lspconfig.nvim', version = '^1.0.0' },
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -653,10 +653,11 @@ require('lazy').setup({
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
+      --
 
-      local mason_registry = require 'mason-registry'
-      local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+      local vue_language_server_path = vim.fn.expand '$MASON/packages/vue-language-server/node_modules/@vue/language-server'
 
+      --
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -672,7 +673,7 @@ require('lazy').setup({
         templ = {},
         -- pyright = {},
         rust_analyzer = {},
-        -- Taken from: https://dev.to/danwalsh/solved-vue-3-typescript-inlay-hint-support-in-neovim-53ej
+        volar = {}, -- vue-language-server
         ts_ls = {
           init_options = {
             plugins = {
@@ -686,7 +687,6 @@ require('lazy').setup({
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         },
         html = { filetypes = { 'html', 'twig', 'hbs' } },
-        volar = {}, -- vue-language-server
         phpactor = {},
         bashls = {},
         lua_ls = {
