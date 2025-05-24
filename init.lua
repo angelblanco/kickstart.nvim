@@ -886,12 +886,6 @@ require('lazy').setup({
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
-
-      cmdline = {
-        enabled = function()
-          return vim.fn.getcmdtype() ~= ':' or not vim.fn.getcmdline():match "^[%%0-9,'<>%-]*!"
-        end,
-      },
     },
   },
 
