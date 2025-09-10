@@ -11,7 +11,7 @@ return {
     version = false, -- Never set this value to "*"! Never!
     opts = {
       provider = 'openrouter',
-      vendors = {
+      providers = {
         openrouter = {
           __inherited_from = 'openai',
           endpoint = 'https://openrouter.ai/api/v1',
