@@ -1,10 +1,10 @@
 #!/bin/bash
 #
-# This file set up installations of the languages I use for coding.
+# This file set up installation of Node JS and several package managers. 
+# Normally you will call it from your non-root user, elevated permisson
+# will be granted with sudo.
 #
 # bash ./install-node.sh
-#
-# Elevated permissions with sudo are mandatory.
 #
 
 set -e
@@ -27,7 +27,11 @@ confirm_action() {
     esac
 }
 
-NODE_VERSION=22
+# You can configure this variables if needed
+NODE_VERSION=24
+NPM_PREFIX="~/.npm-global"
+
+
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 TMP_DIR=$SCRIPT_DIR/tmp
 
@@ -41,8 +45,15 @@ sudo apt install $DEPS
 
 curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION.x -o $TMP_DIR/nodesource_setup.sh
 sudo -E bash $TMP_DIR/nodesource_setup.sh
+rm -rf $TMP_DIR
+
 sudo apt-get install -y nodejs
 sudo corepack enable
+
+mkdir -p ~/.npm-global
+npm config set prefix $NPM_PREFIX
+echo "Npm prefix set to $NPM_PREFIX"
+
 curl -fsSL https://bun.sh/install | bash
 
 echo ""

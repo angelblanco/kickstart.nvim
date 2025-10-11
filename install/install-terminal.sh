@@ -34,7 +34,6 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 CUR_USER=$USER
 ZSHRC_FILE="$HOME/.zshrc"
 TMP_DIR=$SCRIPT_DIR/tmp
-NODE_VERSION=22
 
 echo "This script will install several utilities in your computer."
 echo "Is recommended that you inspect this script before continuing"
@@ -48,7 +47,6 @@ echo "SCRIPT_DIR: $SCRIPT_DIR"
 echo "TMP_DIR: $TMP_DIR"
 echo "HOME: $HOME"
 echo "USER: $USER"
-echo "NODE VERSION: $NODE_VERSION"
 echo "ZSHRC: $ZSHRC_FILE"
 
 confirm_action
