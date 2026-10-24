@@ -1,40 +1,27 @@
-return {
-  'folke/snacks.nvim',
-  priority = 1000,
-  lazy = false,
-  ---@type snacks.Config
-  opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-    -- bigfile = { enabled = true },
-    -- dashboard = { enabled = true },
-    -- explorer = { enabled = true },
-    -- picker = { enabled = true, replace_netrw = false },
-    -- indent = { enabled = true },
-    -- input = { enabled = true },
-    -- notifier = { enabled = true },
-    -- quickfile = { enabled = true },
-    -- scope = { enabled = true },
-    -- scroll = { enabled = true },
-    -- statuscolumn = { enabled = true },
-    -- words = { enabled = true },
-    lazygit = { enabled = true },
-  },
-  keys = {
-    {
-      '<leader>gg',
-      function()
-        Snacks.lazygit()
-      end,
-      desc = 'Lazy[GG]it',
-    },
-    -- {
-    --   '<leader>te',
-    --   function()
-    --     Snacks.explorer()
-    --   end,
-    --   desc = '[T]oggle File [E]xplorer',
-    -- },
-  },
+-- snacks
+-- https://github.com/folke/snacks.nvim
+
+vim.pack.add { 'https://github.com/folke/snacks.nvim' }
+
+---@type snacks.Config
+require('snacks').setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  -- refer to the configuration section below
+  -- bigfile = { enabled = true },
+  -- dashboard = { enabled = true },
+  -- explorer = { enabled = true },
+  -- picker = { enabled = true, replace_netrw = false },
+  -- indent = { enabled = true },
+  -- input = { enabled = true },
+  -- notifier = { enabled = true },
+  -- quickfile = { enabled = true },
+  -- scope = { enabled = true },
+  -- scroll = { enabled = true },
+  -- statuscolumn = { enabled = true },
+  -- words = { enabled = true },
+  lazygit = { enabled = true },
 }
+
+vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Lazy[GG]it' })
+-- vim.keymap.set('n', '<leader>te', function() Snacks.explorer() end, { desc = '[T]oggle File [E]xplorer' })

@@ -1,7 +1,5 @@
--- autopairs
--- https://github.com/windwp/nvim-autopairs
-return {
-    'windwp/nvim-ts-autotag',
-    event = 'BufReadPre',
-    opts = {}
-}
+-- autotag
+-- https://github.com/windwp/nvim-ts-autotag
+
+vim.pack.add { 'https://github.com/windwp/nvim-ts-autotag' }
+require('nvim-ts-autotag').setup {}
