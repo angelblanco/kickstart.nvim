@@ -29,7 +29,7 @@ confirm_action() {
 }
 
 # You can configure this variables if needed
-NODE_VERSION=24
+NODE_VERSION=26
 NPM_PREFIX="~/.npm-global"
 DEPS="ca-certificates curl gnupg"
 
@@ -67,14 +67,8 @@ node --version
 
 echo ""
 
-if confirm_action "Enable Yarn and pnpm via corepack?"; then
-    echo "Enabling corepack..."
-    sudo corepack enable
-    echo "Corepack enabled."
-    echo "Yarn version: "
-    yarn --version
-    echo "PNPM version: "
-    pnpm --version
+if confirm_action "Install pnpm?"; then
+    curl -fsSL https://get.pnpm.io | sh - 
 fi
 
 echo ""
