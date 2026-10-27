@@ -31,10 +31,17 @@ confirm_action() {
 }
 
 NVIM_PATH=/usr/local/bin/nvim
+TREE_SITTER_PATH=/usr/local/bin/tree-sitter
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 DEPS="build-essential ripgrep"
 TMP_DIR="$SCRIPT_DIR/tmp"
 NVIM_ARCH=$(uname -m)
+# apt tree-sitter-cli (0.20.x on Ubuntu 24.04) lacks `tree-sitter build`, required by nvim-treesitter main
+case "$NVIM_ARCH" in
+    x86_64) TREE_SITTER_ARCH=x64 ;;
+    aarch64) TREE_SITTER_ARCH=arm64 ;;
+    *) TREE_SITTER_ARCH=$NVIM_ARCH ;;
+esac
 
 echo "This script will install several utilities in your computer."
 echo "Is recommended that you inspect this script before continuing"
@@ -44,11 +51,13 @@ echo " - Install apt dependecies: $DEPS"
 echo " - Install fuse package for appimage"
 echo " - Download latest neovim stable to $TMP_DIR"
 echo " - Install neovim as app-image in $NVIM_PATH"
+echo " - Install latest tree-sitter CLI in $TREE_SITTER_PATH"
 
 echo "SCRIPT_DIR: $SCRIPT_DIR"
 echo "TMP_DIR: $TMP_DIR"
 echo "NVIM_PATH: $NVIM_PATH"
 echo "NVIM_ARCH: $NVIM_ARCH"
+echo "TREE_SITTER_PATH: $TREE_SITTER_PATH"
 
 confirm_action
 
@@ -68,6 +77,13 @@ wget "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-$NVIM
 sudo chmod +x $TMP_DIR/nvim
 sudo mv $TMP_DIR/nvim $NVIM_PATH
 echo "Neovim installed under $TMP_DIR/nvim"
+
+echo "Installing latest tree-sitter CLI"
+wget "https://github.com/tree-sitter/tree-sitter/releases/latest/download/tree-sitter-linux-$TREE_SITTER_ARCH.gz" -O $TMP_DIR/tree-sitter.gz
+gunzip -f $TMP_DIR/tree-sitter.gz
+sudo chmod +x $TMP_DIR/tree-sitter
+sudo mv $TMP_DIR/tree-sitter $TREE_SITTER_PATH
+echo "tree-sitter installed under $TREE_SITTER_PATH"
 
 echo ""
 echo "---"
